@@ -9,7 +9,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class UserComponent implements OnInit {
 
-  userList:user[]=[]
+  userList: user[] = []
+  userColumns: string[] = []
 
   constructor(private userService: UserService) { }
 
@@ -20,9 +21,20 @@ export class UserComponent implements OnInit {
 
 
   getUsers() {
-    this.userService.getAllUsers().subscribe(res =>{
-      this.userList=res
+    this.userService.getAllUsers().subscribe(res => {
+
+      this.userList = res
+      this.userColumns = Object.keys(this.userList[0])
+      this.userColumns.push('action')
     })
   }
+
+
+  DeleteUser(user: user) {
+    this.userList=this.userList.filter(x => x.id !== user.id)
+  }
+
+
+
 
 }
