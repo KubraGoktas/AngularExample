@@ -6,6 +6,8 @@ import { UserComponent } from './pages/user/user.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'user',component:UserComponent}
+  // {path:'userdetail/:id',component:UserDetail}
+
 
 ];
 

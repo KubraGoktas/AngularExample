@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 import { user } from 'src/app/models/user';
 
 @Injectable({
@@ -12,7 +13,16 @@ export class UserService {
   //observable observer subscriber
 
   getAllUsers() {
-    return this.http.get<user[]>('https://jsonplaceholder.typicode.com/users')
+    return this.http.get<user[]>('https://jsonplaceholder.typicode.com/users').pipe(
+      tap({
+        next: (res) => { return res },
+        error: (err) => console.error(err)
+      })
+    )
+  }
+
+  getSelectedUser(id: number) {
+    return this.http.get<user>(`https://jsonplaceholder.typicode.com/users/${id}`)
   }
 
 }
